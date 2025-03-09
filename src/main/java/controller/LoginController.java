@@ -45,9 +45,9 @@ public class LoginController {
     }
     private void switchToDashBoard() throws IOException{
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Dashboard.fxml"));
-        Parent dashboardview = fxmlLoader.load();
+        Parent dashboard = fxmlLoader.load();
         Stage stage = (Stage) usernameField.getScene().getWindow();
-        stage.setScene(new Scene(dashboardview,800,600));
+        stage.setScene(new Scene(dashboard,800,600));
         stage.setTitle("Dashboard - ProGastro");
         stage.show();
     }

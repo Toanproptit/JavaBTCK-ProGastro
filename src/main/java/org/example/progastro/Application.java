@@ -1,4 +1,4 @@
-    package org.example.progastro;
+package org.example.progastro;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +15,6 @@ public class Application extends javafx.application.Application {
         stage.setScene(scene);
         stage.show();
     }
-
     public static void main(String[] args) {
         launch();
     }

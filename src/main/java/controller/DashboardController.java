@@ -49,6 +49,7 @@ public class DashboardController {
         Parent parent = fxmlLoader.load();
         Scene scene = new Scene(parent,800,600);
         stage.setScene(scene);
+        stage.setTitle("Managefood-ProGastro");
         stage.show();
     }
     public void switchToManageorderController() throws IOException{
@@ -57,6 +58,7 @@ public class DashboardController {
         Parent parent = fxmlLoader.load();
         Scene scene = new Scene(parent,800,600);
         stage.setScene(scene);
+        stage.setTitle("Manageorder-ProGastro");
         stage.show();
     }
 }
