@@ -40,10 +40,10 @@ public class LoginController {
             showAlert("Đăng nhập thất bại", "Sai tài khoản hoặc mật khẩu!");
         }
     }
-    private boolean validateLogin(String username, String password) {
+    public boolean validateLogin(String username, String password) {
         return username.equals("admin") && password.equals("12345"); // Tạm thời hard-code
     }
-    private void switchToDashBoard() throws IOException{
+    public void switchToDashBoard() throws IOException{
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Dashboard.fxml"));
         Parent dashboard = fxmlLoader.load();
         Stage stage = (Stage) usernameField.getScene().getWindow();
@@ -51,7 +51,7 @@ public class LoginController {
         stage.setTitle("Dashboard - ProGastro");
         stage.show();
     }
-    private void showAlert(String title, String message) {
+    public void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);

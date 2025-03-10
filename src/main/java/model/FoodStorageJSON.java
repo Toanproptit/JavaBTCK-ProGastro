@@ -12,28 +12,33 @@ import java.util.List;
 
 
 public class FoodStorageJSON {
-    private static final String FILE_PATH = "resources/data/food.json";
-    public static List<Food> foodList = new ArrayList<>();
+    private static final String FILE_PATH = "food.json";
+    private static List<Food> foodList;
+    static {
+        try {
+            foodList = loadFoods();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static List<Food> loadFoods() throws IOException {
+        File file = new File(FILE_PATH);
         try (FileReader reader = new FileReader(FILE_PATH)) {
-            foodList = new Gson().fromJson(reader, new TypeToken<List<Food>>() {}.getType());
-            if (foodList == null) {
-                foodList = new ArrayList<>();
-            }
+//            foodList = new Gson().fromJson(reader, new TypeToken<List<Food>>() {}.getType());
+            return new Gson().fromJson(reader, new TypeToken<List<Food>>() {}.getType());
         } catch (IOException e) {
             foodList = new ArrayList<>();
         }
-        return foodList;
+        return List.of();
     }
     public static void saveFoods() throws IOException {
         File file = new File(FILE_PATH);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
         try (FileWriter writer = new FileWriter(file)) {
             new Gson().toJson(foodList, writer);
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
     }
     public static void addFood(Food food) {
@@ -43,5 +48,9 @@ public class FoodStorageJSON {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Food> getFoodList() {
+        return foodList;
     }
 }

@@ -4,8 +4,7 @@ module org.example.progastro {
     requires javafx.graphics;
     requires org.jetbrains.annotations;
     requires com.google.gson;
-
-
+    opens model to com.google.gson;
     opens org.example.progastro to javafx.fxml;
     exports org.example.progastro;
     exports controller;

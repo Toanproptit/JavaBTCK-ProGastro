@@ -16,7 +16,7 @@ import model.Food;
 import model.FoodStorageJSON;
 import java.io.IOException;
 
-import static model.FoodStorageJSON.foodList;
+
 
 
 public class ManagefoodController {
@@ -51,6 +51,7 @@ public class ManagefoodController {
     @FXML
     private Button fixfood;
 
+    FoodStorageJSON foodStorageJSON =new FoodStorageJSON();
 
     public void handle(ActionEvent event)throws IOException{
         switchToDashBoard();
@@ -73,10 +74,9 @@ public class ManagefoodController {
         }
 
         Food newFood = new Food(name, description, price);
-        FoodStorageJSON.addFood(newFood);  // Thêm món ăn vào foodList và lưu vào file
+        FoodStorageJSON.addFood(newFood);
 
-        // Cập nhật lại foodList từ file để đồng bộ hóa với giao diện
-        foodList = FXCollections.observableArrayList(FoodStorageJSON.loadFoods());
+//        foodStorageJSON.getFoodList()= FXCollections.observableArrayList(FoodStorageJSON.loadFoods());
 
         showAlert("Thành Công", "Đã thêm món ăn thành công");
     }
