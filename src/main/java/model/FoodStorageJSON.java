@@ -49,7 +49,11 @@ public class FoodStorageJSON {
             e.printStackTrace();
         }
     }
-
+    public static void updateFood(Food food)throws IOException{
+        int i= food.getIndex();
+        foodList.set(i,food);
+        saveFoods();
+    }
     public List<Food> getFoodList() {
         return foodList;
     }

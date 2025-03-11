@@ -37,15 +37,15 @@ public class DashboardController {
     private TextField text2;
 
     @FXML
-    private void handlefoodButton(ActionEvent event) throws IOException{
-        switchToManagefoodController();
+    public void handlefoodButton(ActionEvent event) throws IOException{
+        switchToManageFoodController();
     }
     @FXML
-    private void handleorderButton(ActionEvent event) throws IOException{
-        switchToManageorderController();
+    public void handleorderButton(ActionEvent event) throws IOException{
+        switchToManageOrderController();
     }
 
-    private void switchToManagefoodController() throws IOException{
+    private void switchToManageFoodController() throws IOException{
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Managefood.fxml"));
         Stage stage = (Stage) foodButton.getScene().getWindow();
         Parent parent = fxmlLoader.load();
@@ -54,7 +54,7 @@ public class DashboardController {
         stage.setTitle("Managefood-ProGastro");
         stage.show();
     }
-    private void switchToManageorderController() throws IOException{
+    private void switchToManageOrderController() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/progastro/Manageorder.fxml"));
         Stage stage = (Stage) oderButton.getScene().getWindow();
         Parent parent = fxmlLoader.load();

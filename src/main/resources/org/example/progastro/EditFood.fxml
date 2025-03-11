@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditFoodController">
+    <VBox alignment="CENTER" layoutX="79.0" layoutY="38.0" prefHeight="300" prefWidth="400" spacing="10" xmlns:fx="http://javafx.com/fxml">
+
+        <!-- Tiêu đề -->
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Chỉnh sửa thông tin món ăn" />
+
+        <!-- Trường nhập tên món ăn -->
+        <TextField fx:id="nameField" promptText="Tên món ăn" />
+
+        <!-- Trường nhập mô tả món ăn -->
+        <TextField fx:id="descriptionField" promptText="Mô tả món ăn" />
+
+        <!-- Trường nhập giá món ăn -->
+        <TextField fx:id="priceField" promptText="Giá món ăn" />
+    
+        <!-- Nút Lưu thay đổi -->
+        <Button fx:id="sign" onAction="#handleSign" text="Lưu thay đổi" />
+      <Button fx:id="back" onAction="#switchToManagefood" mnemonicParsing="false" text="Back" />
+
+    </VBox>
+</AnchorPane>
