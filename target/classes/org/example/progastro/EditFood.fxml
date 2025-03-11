@@ -23,7 +23,8 @@
     
         <!-- Nút Lưu thay đổi -->
         <Button fx:id="sign" onAction="#handleSign" text="Lưu thay đổi" />
-      <Button fx:id="back" onAction="#switchToManagefood" mnemonicParsing="false" text="Back" />
+      <Button fx:id="eraseButton" mnemonicParsing="false" text="Xóa món ăn" onAction="#eraseFood" />
+      <Button fx:id="back" mnemonicParsing="false" onAction="#switchToManagefood" text="Back" />
 
     </VBox>
 </AnchorPane>

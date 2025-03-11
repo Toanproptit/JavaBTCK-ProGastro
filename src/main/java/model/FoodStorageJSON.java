@@ -54,6 +54,13 @@ public class FoodStorageJSON {
         foodList.set(i,food);
         saveFoods();
     }
+
+    public static void eraseFood(Food food) throws IOException {
+        int i=food.getIndex();
+        foodList.remove(i);
+        saveFoods();
+    }
+
     public List<Food> getFoodList() {
         return foodList;
     }

@@ -24,19 +24,28 @@ public class EditFoodController {
 
     @FXML
     private TextField priceField;
+
     @FXML
     private Button sign;
+
+    @FXML
+    private Button eraseButton;
 
     @FXML
     public void handleSign(ActionEvent event)throws IOException{
         saveFood();
     }
+
+    public void handleErase(ActionEvent event)throws IOException{
+        eraseFood();
+    }
+
     @FXML
     private void switchToManagefood() throws IOException {
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Managefood.fxml"));
-        Parent dashboardview = fxmlLoader.load();
+        Parent dashboard = fxmlLoader.load();
         Stage stage = (Stage) back.getScene().getWindow();
-        stage.setScene(new Scene(dashboardview,800,600));
+        stage.setScene(new Scene(dashboard,800,600));
         stage.setTitle("ManageFood - ProGastro");
         stage.show();
     }
@@ -47,6 +56,11 @@ public class EditFoodController {
         nameField.setText(food.getName());
         descriptionField.setText(food.getDescription());
         priceField.setText(String.valueOf(food.getPrice()));
+    }
+
+    public void eraseFood() throws IOException{
+        FoodStorageJSON.eraseFood(food);
+        showAlert("Thông báo","Xóa Thành Công");
     }
     public void saveFood() throws IOException {
         food.setName(nameField.getText());

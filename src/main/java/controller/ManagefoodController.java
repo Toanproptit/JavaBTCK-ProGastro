@@ -73,7 +73,7 @@ public class ManagefoodController {
         foodTable.setItems(foods);
         foodTable.setOnMouseClicked(this::handleTableViewClick);
     }
-    public void handle(ActionEvent event)throws IOException{
+    public void handleSwithToDashBoard(ActionEvent event)throws IOException{
         switchToDashBoard();
     }
     @FXML
@@ -92,6 +92,15 @@ public class ManagefoodController {
         if (name.isEmpty() || description.isEmpty()) {
             showAlert("Lỗi", "Vui lòng điền đầy đủ thông tin món ăn");
             return;
+        }
+
+        if (foodTable.getItems() != null && !foodTable.getItems().isEmpty()) {
+            for (Food food : foodTable.getItems()) {
+                if(name.equals(food.getName())){
+                    showAlert("Lỗi","Đã tồn tại món ăn");
+                    return;
+                }
+            }
         }
 
         Food newFood = new Food(name, description, price);
