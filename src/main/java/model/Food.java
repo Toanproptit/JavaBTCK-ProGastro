@@ -8,6 +8,7 @@ public class Food {
     private String name;
     private String description;
     private double price;
+    private int index;
 
     public Food(String name, String description, double price) {
         this.name = name;
@@ -39,4 +40,11 @@ public class Food {
         this.price = price;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 }

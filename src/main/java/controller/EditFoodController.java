@@ -57,9 +57,9 @@ public class EditFoodController {
 
     }
     private void showAlert(String title, String message) {
-        // Hiển thị thông báo lỗi nếu có
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }

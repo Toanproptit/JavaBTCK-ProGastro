@@ -50,13 +50,9 @@ public class FoodStorageJSON {
         }
     }
     public static void updateFood(Food food)throws IOException{
-        for(int i=0;i<foodList.size();++i){
-            if(foodList.get(i).getName().equals(food.getName())){
-                foodList.set(i,food);
-                saveFoods();
-                return;
-            }
-        }
+        int i= food.getIndex();
+        foodList.set(i,food);
+        saveFoods();
     }
     public List<Food> getFoodList() {
         return foodList;

@@ -103,9 +103,9 @@ public class ManagefoodController {
 
     private void switchToDashBoard() throws IOException {
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Dashboard.fxml"));
-        Parent dashboardview = fxmlLoader.load();
+        Parent dashboard = fxmlLoader.load();
         Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.setScene(new Scene(dashboardview,800,600));
+        stage.setScene(new Scene(dashboard,800,600));
         stage.setTitle("Dashboard - ProGastro");
         stage.show();
     }
@@ -119,11 +119,10 @@ public class ManagefoodController {
 
     private void handleTableViewClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            int rowIndex = foodTable.getSelectionModel().getSelectedIndex();
             Food selectedFood = foodTable.getSelectionModel().getSelectedItem();
-            if (selectedFood != null) {
-                openEditFood(selectedFood);
-            }
+            int rowIndex = foodTable.getSelectionModel().getSelectedIndex();
+            selectedFood.setIndex(rowIndex);
+            openEditFood(selectedFood);
         }
     }
     private void openEditFood(Food selectedFood) {
