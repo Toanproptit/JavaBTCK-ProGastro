@@ -1,0 +1,26 @@
+/* Định nghĩa cho VBox */
+.vbox {
+    -fx-background-color: #f0f0f0;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+}
+
+/* Định nghĩa cho các TextField */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-border-color: #ff5722;
+}
+
+/* Định nghĩa cho Button */
+.button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-effect: innershadow(gaussian, #000000, 20, 0.5, 0, 2, 2, 2);
+}
