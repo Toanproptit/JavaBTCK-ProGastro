@@ -1,0 +1,58 @@
+package model;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TableJSON {
+
+    private static final String FILE_PATH = "table.json";
+    private static List<Table> tableList;
+
+    static {
+        try {
+            tableList=loadTable();
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void saveTable() throws IOException {
+        File file = new File(FILE_PATH);
+        try (FileWriter writer = new FileWriter(file)) {
+            new Gson().toJson(tableList, writer);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static List<Table> loadTable() throws IOException {
+        File file = new File(FILE_PATH);
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+            return new Gson().fromJson(reader, new TypeToken<List<Table>>() {}.getType());
+        } catch (IOException e) {
+            tableList = new ArrayList<>();
+        }
+        return List.of();
+    }
+    public static void addTable(Table table){
+        tableList.add(table);
+        try {
+            saveTable();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+}

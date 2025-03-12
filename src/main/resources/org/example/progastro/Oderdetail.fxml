@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane fx:id="summoney" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.progastro.Oderdetail">
+<AnchorPane fx:id="summoney" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OderdetailController">
    <children>
       <Label fx:id="code" layoutX="140.0" layoutY="80.0" text="code" />
       <Label fx:id="guestname" layoutX="137.0" layoutY="110.0" text="guestname" />

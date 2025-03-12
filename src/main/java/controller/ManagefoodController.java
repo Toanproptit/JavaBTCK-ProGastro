@@ -64,7 +64,7 @@ public class ManagefoodController {
     @FXML
     private TableColumn<Food, Double> priceColumn;
     private ObservableList<Food> foods = FXCollections.observableArrayList();
-    FoodStorageJSON foodStorageJSON =new FoodStorageJSON();
+
     public void initialize()throws IOException{
         foods = FXCollections.observableArrayList(FoodStorageJSON.loadFoods());
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -73,7 +73,8 @@ public class ManagefoodController {
         foodTable.setItems(foods);
         foodTable.setOnMouseClicked(this::handleTableViewClick);
     }
-    public void handleSwithToDashBoard(ActionEvent event)throws IOException{
+    @FXML
+    public void handleSwitchToDashBoard(ActionEvent event)throws IOException{
         switchToDashBoard();
     }
     @FXML

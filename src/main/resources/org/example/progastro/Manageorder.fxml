@@ -7,19 +7,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageorderController">
-   <children>
-      <TableView fx:id="tableview" layoutX="338.0" layoutY="78.0" prefHeight="200.0" prefWidth="162.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Mã" />
-          <TableColumn prefWidth="86.4" text="Tên món ăn" />
-        </columns>
-      </TableView>
-      <TextField fx:id="textField1" layoutX="132.0" layoutY="96.0" prefWidth="142.0" />
-      <TextField fx:id="textField2" layoutX="132.0" layoutY="153.0" />
-      <TextField fx:id="textField3" layoutX="132.0" layoutY="228.0" />
-      <Button fx:id="button1" layoutX="33.0" layoutY="90.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="button2" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="button3" layoutX="33.0" layoutY="228.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="backbutton" layoutX="490.0" layoutY="353.0" mnemonicParsing="false" onAction="#handle" prefHeight="26.0" prefWidth="82.0" text="Back" />
-   </children>
+    <children>
+        <!-- TableView để hiển thị thông tin bàn -->
+        <TableView fx:id="tableview" layoutX="50.0" layoutY="50.0" prefHeight="200.0" prefWidth="500.0">
+            <columns>
+                <TableColumn fx:id="columnId" text="Mã bàn" prefWidth="100.0"/>
+                <TableColumn fx:id="columnName" text="Tên bàn" prefWidth="200.0"/>
+                <TableColumn fx:id="columnStatus" text="Trạng thái" prefWidth="200.0"/>
+            </columns>
+        </TableView>
+
+        <!-- TextField để nhập thông tin -->
+        <TextField fx:id="textField1" layoutX="132.0" layoutY="270.0" prefWidth="200.0" promptText="Nhập mã bàn"/>
+        <TextField fx:id="textField2" layoutX="132.0" layoutY="310.0" prefWidth="200.0" promptText="Nhập tên bàn"/>
+        <TextField fx:id="textField3" layoutX="132.0" layoutY="350.0" prefWidth="200.0" promptText="Nhập trạng thái bàn"/>
+
+        <!-- Các nút hành động -->
+        <Button fx:id="buttonAdd" layoutX="350.0" layoutY="270.0" text="Thêm bàn" onAction="#handleAddTable" />
+        <Button fx:id="buttonUpdate" layoutX="350.0" layoutY="310.0" text="Cập nhật trạng thái" />
+        <Button fx:id="buttonRemove" layoutX="350.0" layoutY="350.0" text="Xóa bàn"/>
+
+        <!-- Nút quay lại -->
+        <Button fx:id="backButton" layoutX="490.0" layoutY="353.0" text="Quay lại" onAction="#switchToDashBoard"/>
+    </children>
 </AnchorPane>
