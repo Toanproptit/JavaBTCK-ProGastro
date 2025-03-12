@@ -10,8 +10,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagefoodController">
    <children>
       <Button fx:id="addfood" layoutX="14.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleAddFood" text="Thêm món ăn" />
-      <Button fx:id="fixfood" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" text="Sửa món ăn" />
-      <Button fx:id="erasefood" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" text="Xóa Món ăn" />
       <TableView fx:id="foodTable" layoutX="347.0" layoutY="60.0" prefHeight="226.0" prefWidth="226.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="73.5999755859375" text="Món ăn" />
@@ -22,10 +20,7 @@
       <TextField fx:id="data1AddFood" layoutX="118.0" layoutY="85.0" prefHeight="26.0" prefWidth="54.0" />
       <TextField fx:id="data2AddFood" layoutX="197.0" layoutY="85.0" prefHeight="26.0" prefWidth="54.0" />
       <TextField fx:id="data3AddFood" layoutX="273.0" layoutY="85.0" prefHeight="26.0" prefWidth="54.0" />
-      <Button fx:id="backButton" layoutX="499.0" layoutY="359.0" mnemonicParsing="false" onAction="#handle" prefHeight="26.0" prefWidth="81.0" text="Back" />
-      <TextField fx:id="dataAddFood1" layoutX="118.0" layoutY="146.0" prefHeight="26.0" prefWidth="54.0" />
-      <TextField fx:id="dataFixFood1" layoutX="197.0" layoutY="146.0" prefHeight="26.0" prefWidth="54.0" />
-      <TextField fx:id="dataErasefood1" layoutX="273.0" layoutY="146.0" prefHeight="26.0" prefWidth="54.0" />
+      <Button fx:id="backButton" layoutX="499.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleSwithToDashBoard" prefHeight="26.0" prefWidth="81.0" text="Back" />
       <Label layoutX="113.0" layoutY="65.0" text="Tên món ăn" />
       <Label layoutX="205.0" layoutY="64.0" prefHeight="18.0" prefWidth="38.0" text="Mô tả " />
       <Label layoutX="287.0" layoutY="64.0" prefHeight="18.0" prefWidth="26.0" text="Giá" />
