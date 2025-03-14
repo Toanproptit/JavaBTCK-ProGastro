@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Table;
 import model.TableJSON;
@@ -52,7 +53,31 @@ public class ManageorderController {
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         tableview.setItems(observableList);
-//        tableview.setOnMouseClicked(this::handleTableViewClick);
+        tableview.setOnMouseClicked(this::handleTableViewClick);
+    }
+    private void handleTableViewClick(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            Table selectedTable = tableview.getSelectionModel().getSelectedItem();
+            int rowIndex = tableview.getSelectionModel().getSelectedIndex();
+            selectedTable.setId(rowIndex);
+            openEditFood(selectedTable);
+        }
+    }
+    private void openEditFood(Table selectedTable) {
+        try {
+            FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/EditTable.fxml"));
+            Parent parent = fxmlLoader.load();
+            EditTableController controller =fxmlLoader.getController();
+            controller.setTable(selectedTable);
+            Stage stage = (Stage) tableview.getScene().getWindow();
+            stage.setScene(new Scene(parent,800,600));
+            stage.setTitle("Bàn số "+ selectedTable.getIndex());
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Lỗi", "Không thể mở màn hình chỉnh sửa món ăn!");
+        }
     }
     @FXML
     private void switchToDashBoard(ActionEvent event) throws IOException {

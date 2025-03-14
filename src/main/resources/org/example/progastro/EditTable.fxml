@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="506.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditTableController">
+
+
+    <VBox alignment="CENTER" layoutX="79.0" layoutY="38.0" prefHeight="434.0" prefWidth="423.0" spacing="10" xmlns:fx="http://javafx.com/fxml">
+        <!-- Form sửa bàn -->
+        <Label text="Chỉnh sửa thông tin bàn" />
+        <GridPane hgap="10" vgap="10">
+            <Label text="Tên bàn:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="txtTableName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Trạng thái:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="txtTableStatus" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+
+        <HBox spacing="10">
+            <Button fx:id="btnSave" onAction="#handleSave" text="Lưu" />
+            <Button fx:id="btnDelete" onAction="#handleDelete" text="Xóa bàn" />
+        </HBox>
+
+        <!-- Danh sách món ăn đã đặt -->
+        <Label text="Danh sách món ăn" />
+        <TableView fx:id="tableViewOrders">
+            <columns>
+                <TableColumn fx:id="colFoodName" text="Tên món" />
+                <TableColumn fx:id="colQuantity" text="Số lượng" />
+                <TableColumn fx:id="colPrice" text="Giá" />
+            </columns>
+        </TableView>
+
+        <!-- Chọn món mới -->
+        <HBox spacing="10">
+            <Label text="Chọn món:" />
+            <ComboBox fx:id="comboMenu" prefHeight="26.0" prefWidth="114.0" />
+            <Label text="Số lượng:" />
+            <TextField fx:id="txtQuantity" prefHeight="26.0" prefWidth="42.0" />
+            <Button fx:id="addFood" onAction="#handleAddItem" prefHeight="26.0" prefWidth="82.0" text="Thêm món" />
+        </HBox>
+
+        <HBox spacing="100.0">
+            <Button fx:id="btnEdit" onAction="#handleEditItem" text="Sửa món" />
+            <Button fx:id="btnDeleteItem" onAction="#handleDeleteItem" text="Xóa món" />
+         <Button fx:id="invoice" mnemonicParsing="false" text="Xuất hóa đơn"  onAction="#exportInvoiceToTXT"/>
+        </HBox>
+
+    </VBox>
+   <Button fx:id="backButton" layoutX="534.0" layoutY="446.0" mnemonicParsing="false" onAction="#switchToDashBoard" text="Quay lại" />
+
+</AnchorPane>

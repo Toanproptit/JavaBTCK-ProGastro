@@ -11,23 +11,21 @@
         <!-- TableView để hiển thị thông tin bàn -->
         <TableView fx:id="tableview" layoutX="50.0" layoutY="50.0" prefHeight="200.0" prefWidth="500.0">
             <columns>
-                <TableColumn fx:id="columnId" text="Mã bàn" prefWidth="100.0"/>
-                <TableColumn fx:id="columnName" text="Tên bàn" prefWidth="200.0"/>
-                <TableColumn fx:id="columnStatus" text="Trạng thái" prefWidth="200.0"/>
+                <TableColumn fx:id="columnId" prefWidth="100.0" text="Mã bàn" />
+                <TableColumn fx:id="columnName" prefWidth="200.0" text="Tên bàn" />
+                <TableColumn fx:id="columnStatus" prefWidth="200.0" text="Trạng thái" />
             </columns>
         </TableView>
 
         <!-- TextField để nhập thông tin -->
-        <TextField fx:id="textField1" layoutX="132.0" layoutY="270.0" prefWidth="200.0" promptText="Nhập mã bàn"/>
-        <TextField fx:id="textField2" layoutX="132.0" layoutY="310.0" prefWidth="200.0" promptText="Nhập tên bàn"/>
-        <TextField fx:id="textField3" layoutX="132.0" layoutY="350.0" prefWidth="200.0" promptText="Nhập trạng thái bàn"/>
+        <TextField fx:id="textField1" layoutX="132.0" layoutY="270.0" prefWidth="200.0" promptText="Nhập mã bàn" />
+        <TextField fx:id="textField2" layoutX="132.0" layoutY="310.0" prefWidth="200.0" promptText="Nhập tên bàn" />
+        <TextField fx:id="textField3" layoutX="132.0" layoutY="350.0" prefWidth="200.0" promptText="Nhập trạng thái bàn" />
 
         <!-- Các nút hành động -->
-        <Button fx:id="buttonAdd" layoutX="350.0" layoutY="270.0" text="Thêm bàn" onAction="#handleAddTable" />
-        <Button fx:id="buttonUpdate" layoutX="350.0" layoutY="310.0" text="Cập nhật trạng thái" />
-        <Button fx:id="buttonRemove" layoutX="350.0" layoutY="350.0" text="Xóa bàn"/>
+        <Button fx:id="buttonAdd" layoutX="350.0" layoutY="270.0" onAction="#handleAddTable" text="Thêm bàn" />
 
         <!-- Nút quay lại -->
-        <Button fx:id="backButton" layoutX="490.0" layoutY="353.0" text="Quay lại" onAction="#switchToDashBoard"/>
+        <Button fx:id="backButton" layoutX="490.0" layoutY="353.0" onAction="#switchToDashBoard" text="Quay lại" />
     </children>
 </AnchorPane>

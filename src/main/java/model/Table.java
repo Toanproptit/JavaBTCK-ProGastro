@@ -9,13 +9,21 @@ public class Table {
     private int index;
     private String name;
     private String status;
-    private List<Food> orderFood;
-
+    private List<OrderItem> orderItems;
+    private int id;
     public Table(int index, String name, String status) {
         this.index = index;
         this.name = name;
         this.status = status;
-        this.orderFood = new ArrayList<>();
+        this.orderItems = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getIndex() {
@@ -42,11 +50,11 @@ public class Table {
         this.status = status;
     }
 
-    public List<Food> getOrderFood() {
-        return orderFood;
+    public List<OrderItem> getOrderItem() {
+        return orderItems;
     }
-    public void setOrderFood(List<Food> orderFood) {
-        this.orderFood = orderFood;
+    public void setOrderFood(List<OrderItem> orderFood) {
+        this.orderItems = orderFood;
     }
 
 }

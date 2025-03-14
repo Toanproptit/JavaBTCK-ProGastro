@@ -55,4 +55,25 @@ public class TableJSON {
             e.printStackTrace();
         }
     }
+    public static void addTable1(Table table){
+        for(int i=0;i<tableList.size();++i){
+            if(table.getName().equals(tableList.get(i).getName())){
+                tableList.set(i,table);
+                break;
+            }
+        }
+        try {
+            saveTable();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void earseTable(Table table) throws IOException {
+        tableList.remove(table.getId());
+        saveTable();
+    }
+
+    public static List<Table> getTableList() {
+        return tableList;
+    }
 }
