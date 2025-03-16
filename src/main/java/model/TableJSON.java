@@ -51,6 +51,16 @@ public class TableJSON {
             e.printStackTrace();
         }
     }
+    public static void updateTable1(Table table){
+        int i= table.getId();
+        tableList.set(i,table);
+        try {
+            saveTable();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     public static void updateTable(Table table){
         for(int i=0;i<tableList.size();++i){
             if(table.getName().equals(tableList.get(i).getName())){

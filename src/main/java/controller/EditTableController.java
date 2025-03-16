@@ -211,7 +211,10 @@ public class EditTableController {
 
     @FXML
     void handleSave(ActionEvent event) {
-
+        table.setName(txtTableName.getText());
+        table.setStatus(txtTableStatus.getText());
+        TableJSON.updateTable1(table);
+        showAlert("Lưu thành công","success");
     }
 
     private void showAlert(String title, String message) {
