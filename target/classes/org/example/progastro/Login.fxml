@@ -27,6 +27,7 @@
             <TextField fx:id="passwordField" promptText="Nhập mật khẩu" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="login" layoutX="269.0" layoutY="218.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="84.0" text="Đăng nhập" onAction="#handleLogin" />
+      <Button fx:id="login" layoutX="102.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="26.0" prefWidth="82.0" text="Đăng nhập" />
+      <Button fx:id="registerButton" layoutX="198.0" layoutY="221.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Đăng kí" onAction="#handleRegister" />
    </children>
 </AnchorPane>

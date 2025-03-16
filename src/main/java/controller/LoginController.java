@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Account;
+import model.AccountJSON;
 
 import java.io.IOException;
 
@@ -23,6 +25,9 @@ public class LoginController {
 
     @FXML
     private Button login;
+
+    @FXML
+    private Button registerButton;
 
     @FXML
     private TextField passwordField;
@@ -41,7 +46,14 @@ public class LoginController {
         }
     }
     public boolean validateLogin(String username, String password) {
-        return username.equals("admin") && password.equals("12345"); // Tạm thời hard-code
+
+        for(int i=0;i< AccountJSON.getAccountList().size();++i){
+            if (username.equals(AccountJSON.getAccountList().get(i).getAccount()) &&
+                    password.equals(AccountJSON.getAccountList().get(i).getPassword())) {
+                return true;
+            }
+        }
+        return false;
     }
     public void switchToDashBoard() throws IOException{
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Dashboard.fxml"));
@@ -57,6 +69,17 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    public void handleRegister(ActionEvent event) throws IOException{
+        switchToRegister();
+    }
+    public void switchToRegister() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/progastro/Register.fxml"));
+        Parent parent =fxmlLoader.load();
+        Stage stage = (Stage) registerButton.getScene().getWindow();
+        stage.setScene(new Scene(parent,800,600));
+        stage.setTitle("Register-ProGastro");
+        stage.show();
     }
 }
 
