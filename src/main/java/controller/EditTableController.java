@@ -64,6 +64,10 @@ public class EditTableController {
 
     @FXML
     private TextField txtTableStatus;
+
+    @FXML
+    private TextField quantityField;
+
     private Table table;
     private ObservableList<OrderItem> orderItems = FXCollections.observableArrayList();;
     public void setTable(Table table) {
@@ -100,7 +104,8 @@ public class EditTableController {
                     OrderItem newOrderItem = new OrderItem(selectedFood, quantity);
                     orderItems.add(newOrderItem);
                     table.setOrderFood(orderItems);
-                    TableJSON.addTable1(table);
+                    table.calculateTotalPrice();
+                    TableJSON.updateTable(table);
                     tableViewOrders.setItems(orderItems);
                     showAlert("Thành công", "Đã thêm món ăn vào đơn hàng!");
 
@@ -116,7 +121,7 @@ public class EditTableController {
     }
 
     @FXML
-    void switchToDashBoard(ActionEvent event) throws IOException {
+    void switchToManageOrder(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Manageorder.fxml"));
         Parent parent = fxmlLoader.load();
         Stage stage = (Stage) backButton.getScene().getWindow();
@@ -150,6 +155,7 @@ public class EditTableController {
                 writer.write("====================================\n");
             }
 
+            writer.write("Tổng Tiền: "+ table.getTotalPrice());
             writer.close();
             showAlert("Thông báo", "Hóa đơn đã được xuất thành công.");
         } catch (IOException e) {
@@ -160,14 +166,48 @@ public class EditTableController {
 
 
     @FXML
-    void handleDeleteItem(ActionEvent event) {
+    private void handleDeleteItem(ActionEvent event) {
+        OrderItem orderItem = tableViewOrders.getSelectionModel().getSelectedItem();
 
+        if(orderItem!=null){
+            tableViewOrders.getItems().remove(orderItem);
+            showAlert("Thông báo","Đã Xóa Món ăn");
+        }
+        else {
+            showAlert("Lỗi","Vui Lòng chọn món ăn cần xóa");
+        }
     }
 
     @FXML
     void handleEditItem(ActionEvent event) {
 
+        OrderItem selectedOrderItem = tableViewOrders.getSelectionModel().getSelectedItem();
+
+        if (selectedOrderItem != null) {
+            try {
+                int newQuantity = Integer.parseInt(quantityField.getText());
+                if (newQuantity > 0) {
+                    selectedOrderItem.setQuantity(newQuantity);
+                    int index = orderItems.indexOf(selectedOrderItem);
+                    if (index != -1) {
+                        orderItems.set(index, selectedOrderItem);
+                        table.setOrderFood(orderItems);
+                        table.calculateTotalPrice();
+                        tableViewOrders.refresh();
+                        TableJSON.updateTable(table);
+                        showAlert("Thông báo", "Số lượng món ăn đã được cập nhật.");
+                    }
+                } else {
+                    showAlert("Lỗi", "Số lượng phải lớn hơn 0.");
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Lỗi", "Số lượng phải là một số hợp lệ.");
+            }
+        } else {
+            showAlert("Lỗi", "Vui lòng chọn món ăn cần sửa.");
+        }
     }
+
 
     @FXML
     void handleSave(ActionEvent event) {

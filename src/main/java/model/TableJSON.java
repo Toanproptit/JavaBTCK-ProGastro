@@ -2,15 +2,11 @@ package model;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +51,7 @@ public class TableJSON {
             e.printStackTrace();
         }
     }
-    public static void addTable1(Table table){
+    public static void updateTable(Table table){
         for(int i=0;i<tableList.size();++i){
             if(table.getName().equals(tableList.get(i).getName())){
                 tableList.set(i,table);

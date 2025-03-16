@@ -1,7 +1,5 @@
 package model;
 
-import javafx.beans.binding.BooleanExpression;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +9,13 @@ public class Table {
     private String status;
     private List<OrderItem> orderItems;
     private int id;
+    private double totalPrice;
     public Table(int index, String name, String status) {
         this.index = index;
         this.name = name;
         this.status = status;
         this.orderItems = new ArrayList<>();
+        calculateTotalPrice();
     }
 
     public int getId() {
@@ -53,8 +53,26 @@ public class Table {
     public List<OrderItem> getOrderItem() {
         return orderItems;
     }
+
+    public double getTotalPrice() {
+        return totalPrice ;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public void setOrderFood(List<OrderItem> orderFood) {
         this.orderItems = orderFood;
     }
+    public void calculateTotalPrice() {
+        double sum = 0;
+        for (OrderItem orderItem : orderItems) {
+            sum += orderItem.getQuantity() * orderItem.getFood().getPrice();
+        }
+        // Làm tròn và ép kiểu về int
+        setTotalPrice(sum);
+    }
+
 
 }
