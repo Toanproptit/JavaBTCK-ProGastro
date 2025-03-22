@@ -68,7 +68,7 @@ public class Table {
     public void calculateTotalPrice() {
         double sum = 0;
         for (OrderItem orderItem : orderItems) {
-            sum += orderItem.getQuantity() * orderItem.getFood().getPrice();
+            sum += orderItem.getQuantity() * orderItem.getPrice();
         }
         // Làm tròn và ép kiểu về int
         setTotalPrice(sum);

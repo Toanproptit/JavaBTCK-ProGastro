@@ -6,15 +6,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Account;
 import model.AccountJSON;
+import model.BackgroundImageManager;
 
+import java.io.File;
 import java.io.IOException;
 
 public class RegisterController {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private Button backToLoginButton;
@@ -51,6 +59,34 @@ public class RegisterController {
 
     @FXML
     private Button registerButton;
+
+    public void initialize() {
+
+        String imagePath = BackgroundImageManager.loadBackgroundImageForStage("Register");
+        if (!imagePath.isEmpty()) {
+            root.setStyle("-fx-background-image: url('" + imagePath + "'); -fx-background-size: cover; -fx-background-position: center center;");
+        }
+    }
+
+    @FXML
+    public void handleChangeBackgroundImage(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            String imagePath = selectedFile.toURI().toString();
+
+            root.setStyle("-fx-background-image: url('" + imagePath + "'); -fx-background-size: cover; -fx-background-position: center center;");
+            try {
+                BackgroundImageManager.saveBackgroundImage("Register",imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Lỗi", "Không thể lưu ảnh nền");
+            }
+        }
+    }
+
 
     @FXML
     public void handleRegister(ActionEvent event)throws IOException{

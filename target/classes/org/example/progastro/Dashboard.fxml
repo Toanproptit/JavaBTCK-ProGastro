@@ -1,26 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
-   <children>
-      <Label fx:id="lable1" layoutX="70.0" layoutY="76.0" prefHeight="18.0" prefWidth="68.0" text="Số món ăn" />
-      <Label fx:id="lable2" layoutX="70.0" layoutY="124.0" text="Số đơn hàng" />
-      <Button fx:id="foodButton" layoutX="70.0" layoutY="173.0" mnemonicParsing="false" onAction="#handlefoodButton" prefHeight="26.0" prefWidth="98.0" text="foodManager" />
-      <Button fx:id="oderButton" layoutX="70.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleorderButton" prefHeight="26.0" prefWidth="98.0" text="oderManager" />
-      <Label layoutX="255.0" layoutY="35.0" prefHeight="18.0" prefWidth="90.0" text="Bảng Điều Khiển" textFill="#11df2d" />
-      <TextField fx:id="text1" layoutX="168.0" layoutY="72.0" prefHeight="26.0" prefWidth="38.0" />
-      <TextField fx:id="text2" layoutX="168.0" layoutY="119.0" prefHeight="26.0" prefWidth="37.0" />
-      <TableView fx:id="tableView" layoutX="318.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+    <!-- Header -->
+    <HBox fx:id="header" alignment="CENTER_LEFT" layoutX="273.0" prefHeight="74.0" prefWidth="627.0" spacing="50.0" style="-fx-background-color: #A9CE68; -fx-padding: 10;">
+        <Text fx:id="appName" style="-fx-font-size: 20px; -fx-fill: white;" text="ProGastro Dashboard" wrappingWidth="131.1702880859375" />
+      <VBox prefHeight="53.0" prefWidth="153.0" style="-fx-background-color: #A9CE68;">
+         <children>
+               <Label fx:id="usernameLabel" prefHeight="26.0" prefWidth="133.0" style="-fx-font-size: 16px; -fx-fill: white;" text="Tên người dùng:" />
+            <Label fx:id="nameUser" />
+         </children>
+      </VBox>
+         <Button fx:id="logoutButton" prefHeight="40.0" prefWidth="142.0" style="-fx-text-fill: white;" text="Đăng xuất" onAction="#switchToLoginController" />
+    </HBox>
+
+    <!-- Sidebar -->
+    <VBox fx:id="sidebar" alignment="TOP_LEFT" prefHeight="600.0" prefWidth="250" spacing="20" style="-fx-background-color: #B6C0AC; -fx-padding: 20;">
+        <Text style="-fx-font-size: 14px; -fx-fill: white;" text="© 2025 ProGastro. All rights reserved." />
+
+        <!-- Thêm các nút mới -->
+        <Button fx:id="foodButton" onAction="#handlefoodButton" style="-fx-text-fill: white;" text="Quản lí thức ăn" />
+        <Button fx:id="orderButton" onAction="#handleorderButton" style="-fx-text-fill: white;" text="Quản lí bàn" />
+        <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Báo cáo Doanh thu" />
+        <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Cài đặt" />
+      <Button fx:id="choosePhoto" onMouseClicked="#handleChangeBackgroundImage" prefHeight="40.0" prefWidth="130.0" style="-fx-text-fill: white;" text="Chọn ảnh nền" />
+    </VBox>
+
+    <!-- Main Content -->
+    <AnchorPane fx:id="root" layoutX="273.0" layoutY="74.0" prefHeight="510.0" prefWidth="594.0" style="-fx-background-color: #F5F5F5;">
+
+        <!-- Tiêu đề -->
+        <Label layoutX="200.0" layoutY="14.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Tổng Quan" />
+
+        <!-- Các chỉ số nhanh -->
+        <HBox layoutX="30.0" layoutY="60.0" spacing="20">
+            <VBox prefHeight="75.0" prefWidth="154.0" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 8; -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 4, 0.0, 2, 2);">
+                <Label style="-fx-font-weight: bold;" text="Doanh thu hôm nay" />
+                <Label fx:id="revenueTodayLabel" style="-fx-font-size: 18px; -fx-text-fill: green;" text="0 VND" />
+            </VBox>
+
+            <VBox prefHeight="75.0" prefWidth="108.0" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 8; -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 4, 0.0, 2, 2);">
+                <Label style="-fx-font-weight: bold;" text="Bàn đang sử dụng" />
+                <Label fx:id="activeTablesLabel" style="-fx-font-size: 18px;" text="0 bàn" />
+            </VBox>
+
+            <VBox style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 8; -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 4, 0.0, 2, 2);">
+                <Label style="-fx-font-weight: bold;" text="Tổng hóa đơn" />
+                <Label fx:id="totalInvoicesLabel" style="-fx-font-size: 18px;" text="0 hóa đơn" />
+            </VBox>
+
+            <VBox prefHeight="75.0" prefWidth="124.0" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 8; -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 4, 0.0, 2, 2);">
+                <Label style="-fx-font-weight: bold;" text="Tổng món ăn" />
+                <Label fx:id="totalDishesLabel" style="-fx-font-size: 18px;" text="0 món" />
+            </VBox>
+        </HBox>
+
+        <!-- Biểu đồ doanh thu -->
+        <Label layoutX="30.0" layoutY="150.0" style="-fx-font-weight: bold;" text="Biểu đồ doanh thu theo ngày" />
+        <BarChart fx:id="revenueChart" layoutX="30.0" layoutY="180.0" prefHeight="160.0" prefWidth="470.0">
+            <xAxis>
+                <CategoryAxis label="Ngày" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Doanh thu (VND)" />
+            </yAxis>
+        </BarChart>
+
+        <!-- Top 5 món bán chạy -->
+        <Label layoutX="30.0" layoutY="360.0" style="-fx-font-weight: bold;" text="Top 5 món ăn bán chạy" />
+        <TableView fx:id="topDishesTable" layoutX="30.0" layoutY="390.0" prefHeight="120.0" prefWidth="470.0">
+            <columns>
+                <TableColumn fx:id="colDishName" prefWidth="200" text="Tên món" />
+                <TableColumn fx:id="colDishCount" prefWidth="120" text="Số lượng bán" />
+            </columns>
+        </TableView>
+
+    </AnchorPane>
+
 </AnchorPane>

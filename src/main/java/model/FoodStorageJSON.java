@@ -1,6 +1,7 @@
 package model;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class FoodStorageJSON {
     public static void saveFoods() throws IOException {
         File file = new File(FILE_PATH);
         try (FileWriter writer = new FileWriter(file)) {
-            new Gson().toJson(foodList, writer);
+            new GsonBuilder().setPrettyPrinting().create().toJson(foodList, writer);
         }
         catch (IOException e){
             e.printStackTrace();
