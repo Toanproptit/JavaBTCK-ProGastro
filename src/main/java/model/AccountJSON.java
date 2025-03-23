@@ -1,6 +1,7 @@
 package model;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -34,7 +35,7 @@ public class AccountJSON {
     public static void saveAccounts() throws IOException {
         File file = new File(FILE_PATH);
         try (FileWriter writer = new FileWriter(file)) {
-            new Gson().toJson(accountList, writer);
+            new GsonBuilder().setPrettyPrinting().create().toJson(accountList, writer);
         }
         catch (IOException e){
             e.printStackTrace();

@@ -11,11 +11,21 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.*;
+
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.control.Alert;
 
 
@@ -63,26 +73,65 @@ public class EditTableController {
     private TextField txtTableName;
 
     @FXML
-    private TextField txtTableStatus;
+    private ComboBox<String> comboTableStatus;
+
+    @FXML
+    private TextField quantityField;
+
+    @FXML
+    private TextField total;
+
+    @FXML
+    private Button choosePhoto;
+
+    @FXML
+    private AnchorPane root;
+
     private Table table;
-    private ObservableList<OrderItem> orderItems = FXCollections.observableArrayList();;
+    private ObservableList<OrderItem> orderItems = FXCollections.observableArrayList();
+
+    public void initialize() throws IOException {
+        comboTableStatus.getItems().addAll("Trống", "Đang sử dụng");
+        String imagePath = BackgroundImageManager.loadBackgroundImageForStage("editTable");
+        if (!imagePath.isEmpty()) {
+            root.setStyle("-fx-background-image: url('" + imagePath + "'); -fx-background-size: cover; -fx-background-position: center center;");
+        }
+        // Gán dữ liệu vào ComboBox (menu)
+        comboMenu.getItems().addAll(FoodStorageJSON.loadFoods());
+        // Gán các cột trong TableView
+        colFoodName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        tableViewOrders.setItems(orderItems);
+
+    }
+
+    @FXML
+    public void handleChangeBackgroundImage(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            String imagePath = selectedFile.toURI().toString();
+
+            root.setStyle("-fx-background-image: url('" + imagePath + "'); -fx-background-size: cover; -fx-background-position: center center;");
+            try {
+                BackgroundImageManager.saveBackgroundImage("editTable",imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Lỗi", "Không thể lưu ảnh nền");
+            }
+        }
+    }
+
     public void setTable(Table table) {
         this.table = table;
         txtTableName.setText(table.getName());
-        txtTableStatus.setText(table.getStatus());
+        comboTableStatus.setValue(table.getStatus());
         orderItems = FXCollections.observableArrayList(table.getOrderItem());
         tableViewOrders.setItems(orderItems);
-    }
-    public void initialize() throws IOException {
-        // Gán dữ liệu vào ComboBox (menu)
-        comboMenu.getItems().addAll(FoodStorageJSON.loadFoods());
-
-        // Gán các cột trong TableView
-        colFoodName.setCellValueFactory(new PropertyValueFactory<>("foodName"));
-        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        tableViewOrders.setItems(orderItems);
+        total.setText(String.valueOf(table.getTotalPrice()));
     }
 
 
@@ -100,7 +149,9 @@ public class EditTableController {
                     OrderItem newOrderItem = new OrderItem(selectedFood, quantity);
                     orderItems.add(newOrderItem);
                     table.setOrderFood(orderItems);
-                    TableJSON.addTable1(table);
+                    table.calculateTotalPrice();
+                    total.setText(String.valueOf(table.getTotalPrice()));
+                    TableJSON.updateTable(table);
                     tableViewOrders.setItems(orderItems);
                     showAlert("Thành công", "Đã thêm món ăn vào đơn hàng!");
 
@@ -116,11 +167,13 @@ public class EditTableController {
     }
 
     @FXML
-    void switchToDashBoard(ActionEvent event) throws IOException {
+    void switchToManageOrder(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Manageorder.fxml"));
         Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent,800,600);
         Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.setScene(new Scene(parent,800,600));
+        scene.getStylesheets().add(getClass().getResource("/org/example/progastro/Manageorder.css").toExternalForm());
+        stage.setScene(scene);
         stage.setTitle("ManageOrder - ProGastro");
         stage.show();
     }
@@ -134,44 +187,94 @@ public class EditTableController {
 
 
     @FXML
-    public void exportInvoiceToTXT(ActionEvent event) {
+    public void exportInvoiceToTXT(ActionEvent event) throws IOException {
         try {
             File file = new File("Invoice.txt");
-            FileWriter writer = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
             writer.write("Hóa Đơn\n");
+            writer.write("Ngày xuất hóa đơn: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "\n");
             writer.write("====================================\n");
 
             // Duyệt qua các OrderItem trong TableView và viết thông tin vào file
             for (OrderItem orderItem : tableViewOrders.getItems()) {
-                writer.write("Tên Món: " + orderItem.getFood().getName() + "\n");
+                writer.write("Tên Món: " + orderItem.getName()+ "\n");
                 writer.write("Số Lượng: " + orderItem.getQuantity() + "\n");
-                writer.write("Giá: " + orderItem.getFood().getPrice() + "\n");
+                writer.write("Giá: " + orderItem.getPrice()+ "\n");
                 writer.write("====================================\n");
             }
 
+            writer.write("Tổng Tiền: "+ table.getTotalPrice());
             writer.close();
+            saveInvoiceToJson(table.getName(),table.getTotalPrice());
             showAlert("Thông báo", "Hóa đơn đã được xuất thành công.");
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Lỗi", "Không thể xuất hóa đơn.");
         }
+
     }
 
+    private void saveInvoiceToJson(String tableName, double totalPrice) throws IOException {
+        Invoice invoice = new Invoice(tableName, orderItems, totalPrice);
+        InvoiceStorageJSON.addInvoice(invoice);
+    }
 
     @FXML
-    void handleDeleteItem(ActionEvent event) {
+    private void handleDeleteItem(ActionEvent event) {
+        OrderItem selectedItem = tableViewOrders.getSelectionModel().getSelectedItem();
 
+        if (selectedItem != null) {
+            orderItems.remove(selectedItem); // Chỉ cần xóa ở đây
+            table.setOrderFood(orderItems);
+            table.calculateTotalPrice();
+            tableViewOrders.refresh();
+            TableJSON.updateTable(table);
+            total.setText(String.valueOf(table.getTotalPrice()));
+            showAlert("Thông báo", "Đã Xóa Món ăn");
+        } else {
+            showAlert("Lỗi", "Vui Lòng chọn món ăn cần xóa");
+        }
     }
 
     @FXML
     void handleEditItem(ActionEvent event) {
 
+        OrderItem selectedOrderItem = tableViewOrders.getSelectionModel().getSelectedItem();
+
+        if (selectedOrderItem != null) {
+            try {
+                int newQuantity = Integer.parseInt(quantityField.getText());
+                if (newQuantity > 0) {
+                    selectedOrderItem.setQuantity(newQuantity);
+                    int index = orderItems.indexOf(selectedOrderItem);
+                    if (index != -1) {
+                        orderItems.set(index, selectedOrderItem);
+                        table.setOrderFood(orderItems);
+                        table.calculateTotalPrice();
+                        tableViewOrders.refresh();
+                        TableJSON.updateTable(table);
+                        total.setText(String.valueOf(table.getTotalPrice()));
+                        showAlert("Thông báo", "Số lượng món ăn đã được cập nhật.");
+                    }
+                } else {
+                    showAlert("Lỗi", "Số lượng phải lớn hơn 0.");
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Lỗi", "Số lượng phải là một số hợp lệ.");
+            }
+        } else {
+            showAlert("Lỗi", "Vui lòng chọn món ăn cần sửa.");
+        }
     }
+
 
     @FXML
     void handleSave(ActionEvent event) {
-
+        table.setName(txtTableName.getText());
+        table.setStatus(comboTableStatus.getValue());
+        TableJSON.updateTable1(table);
+        showAlert("Lưu thành công","success");
     }
 
     private void showAlert(String title, String message) {

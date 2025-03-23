@@ -1,5 +1,7 @@
 package controller;
 
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,18 +11,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.BackgroundImageManager;
 import model.Food;
 import model.FoodStorageJSON;
-
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.input.MouseEvent;
-
+import java.io.File;
 import java.io.IOException;
 
 
 
 
 public class ManagefoodController {
+    @FXML
+    public Button choosePhoto;
 
     @FXML
     private Button addfood;
@@ -63,9 +69,17 @@ public class ManagefoodController {
 
     @FXML
     private TableColumn<Food, Double> priceColumn;
+
+    @FXML
+    private AnchorPane root;
+
     private ObservableList<Food> foods = FXCollections.observableArrayList();
 
     public void initialize()throws IOException{
+        String imagePath = BackgroundImageManager.loadBackgroundImageForStage("ManageFood");
+        if (!imagePath.isEmpty()) {
+            root.setStyle("-fx-background-image: url('" + imagePath + "'); -fx-background-size: cover; -fx-background-position: center center;");
+        }
         foods = FXCollections.observableArrayList(FoodStorageJSON.loadFoods());
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -73,6 +87,26 @@ public class ManagefoodController {
         foodTable.setItems(foods);
         foodTable.setOnMouseClicked(this::handleTableViewClick);
     }
+
+    @FXML
+    public void handleChangeBackgroundImage(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            String imagePath = selectedFile.toURI().toString();
+
+            root.setStyle("-fx-background-image: url('" + imagePath + "'); -fx-background-size: cover; -fx-background-position: center center;");
+            try {
+                BackgroundImageManager.saveBackgroundImage("ManageFood",imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Lỗi", "Không thể lưu ảnh nền");
+            }
+        }
+    }
+
     @FXML
     public void handleSwitchToDashBoard(ActionEvent event)throws IOException{
         switchToDashBoard();
@@ -114,8 +148,10 @@ public class ManagefoodController {
     private void switchToDashBoard() throws IOException {
         FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/org/example/progastro/Dashboard.fxml"));
         Parent dashboard = fxmlLoader.load();
+        Scene scene = new Scene(dashboard,800,600);
+        scene.getStylesheets().add(getClass().getResource("/org/example/progastro/Dashboard.css").toExternalForm());
         Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.setScene(new Scene(dashboard,800,600));
+        stage.setScene(scene);
         stage.setTitle("Dashboard - ProGastro");
         stage.show();
     }
@@ -141,8 +177,10 @@ public class ManagefoodController {
             Parent parent = fxmlLoader.load();
             EditFoodController controller =fxmlLoader.getController();
             controller.setFood(selectedFood);
+            Scene scene = new Scene(parent,800 ,600);
             Stage stage = (Stage) foodTable.getScene().getWindow();
-            stage.setScene(new Scene(parent,800,600));
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/org/example/progastro/EditFood.css").toExternalForm());
             stage.setTitle("Chỉnh sửa món ăn");
             stage.show();
         }

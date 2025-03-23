@@ -9,11 +9,13 @@ public class Food {
     private String description;
     private double price;
     private int index;
+    private String imagePath;
 
     public Food(String name, String description, double price) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.imagePath="";
     }
 
     public String getName() {
@@ -46,6 +48,14 @@ public class Food {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String toString(){

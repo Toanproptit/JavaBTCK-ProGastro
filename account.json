@@ -1,1 +1,6 @@
-[{"account":"sdfsdf","password":"sdf"},{"account":"admin","password":"12345"},{"account":"admin123","password":"12345"},{"account":"asdad","password":"12345"}]
+[
+  {
+    "account": "admin",
+    "password": "12345"
+  }
+]
