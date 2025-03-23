@@ -6,7 +6,8 @@
 
 ## UML
 ### Class Diagram
-![alt text](src\main\resources\UML\classdiagram.png)
+![Class Diagram](src/main/resources/UML/classdiagram.png)
+
 ### Activity Diagram
-![alt text](src\main\resources\UML\activitidiagram.png)
+![Activity Diagram](src/main/resources/UML/activitidiagram.png)
 
