@@ -1,0 +1,138 @@
+[
+  {
+    "index": 1,
+    "name": "Bàn 1",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm",
+        "price": 12000.0,
+        "quantity": 1
+      },
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "id": 5,
+    "totalPrice": 156000.0
+  },
+  {
+    "index": 2,
+    "name": "bàn 2",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm",
+        "price": 12000.0,
+        "quantity": 1
+      }
+    ],
+    "id": 1,
+    "totalPrice": 12000.0
+  },
+  {
+    "index": 3,
+    "name": "bàn 3",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "id": 2,
+    "totalPrice": 144000.0
+  },
+  {
+    "index": 4,
+    "name": "Bàn 4",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "id": 3,
+    "totalPrice": 144000.0
+  },
+  {
+    "index": 5,
+    "name": "bàn 5",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "id": 4,
+    "totalPrice": 144000.0
+  },
+  {
+    "index": 6,
+    "name": "bàn 6",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "id": 5,
+    "totalPrice": 144000.0
+  },
+  {
+    "index": 7,
+    "name": "Bàn 7",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      },
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 111
+      }
+    ],
+    "id": 6,
+    "totalPrice": 1476000.0
+  },
+  {
+    "index": 8,
+    "name": "Bàn 8",
+    "status": "Đang phục vụ",
+    "orderItems": [
+      {
+        "name": "Gà Hầm",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "id": 7,
+    "totalPrice": 144000.0
+  },
+  {
+    "index": 9,
+    "name": "bàn 9",
+    "status": "Đang sử dụng",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "id": 8,
+    "totalPrice": 144000.0
+  }
+]
