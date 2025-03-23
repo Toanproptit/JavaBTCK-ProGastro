@@ -1,0 +1,91 @@
+[
+  {
+    "tableName": "Bàn 1",
+    "orderItems": [
+      {
+        "name": "Gà Hầm",
+        "price": 12000.0,
+        "quantity": 1
+      },
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "totalPrice": 156000.0,
+    "createdAt": "2025-03-23 20:00:16"
+  },
+  {
+    "tableName": "bàn 2",
+    "orderItems": [
+      {
+        "name": "Gà Hầm",
+        "price": 12000.0,
+        "quantity": 1
+      }
+    ],
+    "totalPrice": 12000.0,
+    "createdAt": "2025-03-23 20:00:22"
+  },
+  {
+    "tableName": "bàn 3",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "totalPrice": 144000.0,
+    "createdAt": "2025-03-23 20:00:26"
+  },
+  {
+    "tableName": "Bàn 4",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "totalPrice": 144000.0,
+    "createdAt": "2025-03-23 20:00:32"
+  },
+  {
+    "tableName": "Bàn 8",
+    "orderItems": [
+      {
+        "name": "Gà Hầm",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "totalPrice": 144000.0,
+    "createdAt": "2025-03-23 20:01:05"
+  },
+  {
+    "tableName": "bàn 6",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "totalPrice": 144000.0,
+    "createdAt": "2025-03-23 20:01:33"
+  },
+  {
+    "tableName": "bàn 9",
+    "orderItems": [
+      {
+        "name": "Gà Hầm Xương",
+        "price": 12000.0,
+        "quantity": 12
+      }
+    ],
+    "totalPrice": 144000.0,
+    "createdAt": "2025-03-23 20:10:38"
+  }
+]
